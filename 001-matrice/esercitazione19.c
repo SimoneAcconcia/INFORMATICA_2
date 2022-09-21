@@ -21,7 +21,7 @@ void carica_randomvettore(int vet[],int dim);
 void carica_randommat(int mat[][C], int righe,int colonne);
 
 //funzione stampa
-void stampa(int mat[][C]);
+void stampa(int mat[][C],int r,int c);
 
 //funzione che carica il vettore da tastiera
 void carica_manualevet(int vet[],int dim);
@@ -33,7 +33,7 @@ void carica_manualemat(int mat[][C] ,int colonne);
 void ordinamento_vettore(int vet[],int dim);
 
 //ordina le righe della riga chiesta dall'utente della matrice
-void ordinamento_conriga(int mat[][C] ,int righe,int colonne);
+void ordinamento_conriga(int mat[][C] ,int r,int c);
 
 //ricerca maggiore
 int maggiore(int mat[][C],int riga,int colonne);
@@ -41,22 +41,25 @@ int maggiore(int mat[][C],int riga,int colonne);
 //ricerca minore
 int minore(int mat[][C],int riga,int colonne);
 
+//inserimento ordinato ogni volta che si inserisce un numero il vettore è ordinato
+void inserimento_ordinato(int vet[],int r);
+
 //ricerca un numero all'interno del vettore la riga è scelta dall'utente
 int ricercaingenua(int vet[],int dim,int x);
 //funzioni colonne
-void caricaColrandom(int vet[],int dim);
-void caricaColtastiera(int vet[],int dim);
-void stampaCol(int vet[],int dim);
-
+void caricaColrandom(int mat[][C],int r,int x);
+void caricaColtastiera(int mat[][C],int r,int x);
+void stampaCol(int mat[][C],int r,int x);
+int ricercaCol(int mat[][C],int r,int x,int y); // funzione ricerca su una colonna indicata 
 int main()
 {
 
 	int matrice[R][C],a,b,r;
 	srand(time(NULL));
-    printf("\n\n");
+	printf("\n\n");
     printf("generazione numeri casuali matrice\n\n");
     carica_randommat(matrice,R,C);
-    stampa(matrice);
+    stampa(matrice,R,C);
     //carica_manualemat(matrice,C);
     //stampa(matrice);
     printf("inserisci la riga su cui vuoi ricercare l'elemento\n'");
@@ -65,16 +68,32 @@ int main()
     scanf("%d",&b);
     r=ricercaingenua(matrice[a],R,b);
     printf("%d",r);
-   printf("inserisci la riga su cui vuoi riordinare\n'");
+    printf("inserisci la riga su cui vuoi riordinare\n'");
     scanf("%d",&a);
     ordinamento_conriga(matrice,a,C); 
-    stampa(matrice);
+    stampa(matrice,R,C);
   
   	r=maggiore(matrice,R,C);
   	printf(" il maggiore:%d\n",r);
   	r=minore(matrice,R,C),
     printf(" il minore:%d\n",r);
-   
+    printf("inserisci la colonna su cui vuoi caricare la matrice\n");
+    scanf("%d",&a);
+    caricaColrandom( matrice,R,a);
+    stampa(matrice,R,C);
+    printf("inserisci la colonna su cui vuoi caricare la matrice\n");
+    scanf("%d",&a);
+    caricaColtastiera(matrice,R,a);
+    stampa(matrice,R,C);
+	printf("inserisci la colonna che vuoi stampare\n");
+	scanf("%d",&a);
+	stampaCol(matrice,R,a);
+	printf("inserisci la colonna dove effettuare la ricerca\n e il numero da cercare\n");
+	scanf("%d%d",&a,&b);
+	r=ricercaCol(matrice,R,a,b);
+	printf("iil numero e' in posizione :'%d",r);
+	//inserimento_ordinato(matrice,R);
+	
 }
 
 void carica_randomvettore(int vet[], int dim)
@@ -85,12 +104,12 @@ void carica_randomvettore(int vet[], int dim)
 		vet[i]=rand()%(max-min+1)+min;
 	}
 }
-void stampa(int mat[][C])
+void stampa(int mat[][C],int r,int c)
 {
 	int i,j;
-	for(i=0;i<R;i++)
+	for(i=0;i<r;i++)
 	{
-	 for(j=0;j<C;j++)
+	 for(j=0;j<c;j++)
 	 {
 	 	printf("%d\n",mat[i][j]);
 	 }
@@ -152,12 +171,12 @@ void ordinamento_vettore(int vet[],int dim)
 	
 }
 
-void ordinamento_conriga(int mat[][C] ,int righe ,int colonne)
+void ordinamento_conriga(int mat[][C] ,int r ,int c)
 {
 	int i;
-	for(i=0;i<colonne;i++)
+	for(i=0;i<c;i++)
 	{
-		ordinamento_vettore(mat[righe],i);
+		ordinamento_vettore(mat[i],c);
 	}
 	
 }
@@ -214,3 +233,69 @@ int minore(int mat[][C],int riga,int colonne)
 	return m;
 }
 
+void caricaColrandom(int mat[][C],int r,int x)
+{
+	int j;
+
+		for(j=0;j<r;j++)
+		{
+			mat[j][x]=rand()%(max-min+1)+min;
+		}
+	
+	
+}
+void caricaColtastiera(int mat[][C],int r,int x)
+{	int  i,j;
+	printf("inserisci un numero");
+	
+		for(j=0;j<r;j++)
+		{
+			scanf("%d",&mat[j][x])	;
+		}	
+	
+}
+void stampaCol(int mat[][C],int r, int x)
+{
+	int j,i;
+	for(i=0;i<r;i++)
+	{
+		printf("%d\n",mat[i][x]);
+	}
+}
+
+int ricercaCol(int mat[][C],int r,int x,int y)
+{
+	int i,indice=-1;
+	for(i=0;i<r;i++)
+	{
+		if(mat[i][x]==y)
+		{
+			indice=i;
+		}
+	}
+	
+	return indice;
+	
+}
+
+//void inserimento_ordinato(int vet[],int r)
+{
+		
+	int i,temp=0,j=0;
+
+	for(i=1;i<10;i++)
+	{ 
+            temp=vet[i]; 
+            j=i-1; 
+            while(j>=0 && vet[j]>temp){
+		vet[j+1]=vet[j];		
+		j--;		
+	}
+	vet[j+1]=temp;
+	}
+
+	for(i=0;i<10;i++){
+		printf("%d \t", vet[i]);
+	}
+		
+}
