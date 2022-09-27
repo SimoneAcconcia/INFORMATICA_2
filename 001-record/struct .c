@@ -3,39 +3,51 @@
 #include <string.h>
 #define N 20
 #define V 5
-struct  s_alunno
-{
-	int matricola;
-	char cognome [N] ;
-	int voti [V];
-	
-} typedef s_alunno ;
 
-struct s_nascita
+
+struct data
 {
 	int giorno;
 	char mese[N];
 	int anno;
 	
-}typedef s_nascita;
+	
+}typedef data;
 
-void inserimento(s_alunno*st1,s_nascita *st2);
-void stampa(s_alunno st1,s_nascita st2);
-void copia_record(s_alunno st1,s_nascita st2);
+struct  s_alunno
+{
+	int matricola;
+	char cognome [N] ;
+	int voti [V];
+	data nascita ;
+	
+} typedef s_alunno ;
+
+ /*struct s_copia
+{
+	
+	
+	
+}typdef s_copia;
+*/
+void inserimento(s_alunno*st1);
+void stampa(s_alunno st1);
+//void copia_record(s_alunno st1, s_copia st2);
 int main()
 {
-	s_alunno st1 ;    
-	s_nascita st2;	 //spazio allocato sulla ram con più campi
-	inserimento(&st1,&st2);
-	stampa(st1,st2);
-	copia_record(st2,st);
-	stampa(st1,st2);
+	s_alunno st1 ;     //spazio allocato sulla ram con più campi
+	//s_copia st2;						
+	inserimento(&st1);
+	stampa(st1);
+//	copia_record(st1,st2);
+	
+
 	
 	
 }
 
 
-void inserimento(s_alunno*st1,s_nascita *st2)
+void inserimento(s_alunno*st1)
 {	int i=0;
 	printf("inserisci il numero della matricola\n\n");
 	scanf("%d",&st1->matricola);
@@ -48,16 +60,16 @@ void inserimento(s_alunno*st1,s_nascita *st2)
 		scanf("%d",&st1->voti[i]);
 	}
 	
-	/*printf("inserisci il giorno di nascita\n\n");
-	scanf("%d",&st2->giorno);
+	printf("inserisci il giorno di nascita\n\n");
+	scanf("%d",&st1->nascita.giorno);
 	printf("inserisci il mese di nascita\n\n");
-	scanf("%s",st2->mese);
+	scanf("%s",st1-> nascita.mese);
 	printf("inserisci l'anno di nascita\n'");
-	scanf("%d",st2->anno);
-*/	
+	scanf("%d",st1->nascita.anno);
+	
 	
 }
-void stampa(s_alunno st1,s_nascita st2)
+void stampa(s_alunno st1)
 {
 	int i=0;
 	printf("numero matricola:");
@@ -70,24 +82,18 @@ void stampa(s_alunno st1,s_nascita st2)
 		printf("%d\n",st1.voti[i]);
 	}
 	
-	/*printf("giorno di nascita:");
-	printf("%d\n",st2.giorno);
+	printf("giorno di nascita:");
+	printf("%d\n",st1.nascita.giorno);
 	printf("mese di nascita matricola:\n");
-	printf("%s\n",st2.mese[N]);
+	printf("%s\n",st1.nascita.mese);
 	printf("anno di nascita:\n");
-	printf("%d",st2.anno);
-*/	
+	printf("%d",st1.nascita.anno);
+	
 }
 
-void copia_record(s_alunno st1,s_nascita st2)
+/*void copia_record(s_alunno st1, s_copia st2)
 {
 	st2=st1;
 	
-	
-	
-	
 }
-
- 
-
-
+*/
