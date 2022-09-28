@@ -65,7 +65,7 @@ void inserimento(s_alunno*st1)
 	printf("inserisci il mese di nascita\n\n");
 	scanf("%s",st1-> nascita.mese);
 	printf("inserisci l'anno di nascita\n'");
-	scanf("%d",st1->nascita.anno);
+	scanf("%d",&st1->nascita.anno);
 	
 	
 }
