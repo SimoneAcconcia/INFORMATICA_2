@@ -10,7 +10,7 @@ Acconcia Simone        *
 #include <stdio.h>
 #include <string.h>
 #include <limits.h>
-#define N 5
+#define N 2
 #define S 20
 #define V 8
 
@@ -29,8 +29,9 @@ void stampa(s_alunno []);
 
 int main()
 {
-	s_alunno studenti[N]  //stiamo dichiarando un array studente di tipo alunno
-	
+	s_alunno studenti[N] ; //stiamo dichiarando un array studente di tipo alunno
+	carica(studenti);
+	stampa(studenti);
 }
 
 
@@ -40,14 +41,15 @@ void carica(s_alunno st [])
 
 	for(i=0;i<N;i++)
 	{
-		printf("inserisci numero matricola");
+		printf("inserisci numero matricola\n");
 		scanf("%d",&st[i].matricola);
-		printf("inserisci il cognome");
+		printf("inserisci il cognome\n");
 		scanf("%s",st[i].cognome);
 		
 		for(j=0;j<V;j++)
 		{
-			printf("inserisci un voto"):
+			printf("inserisci un voto\n");
+			
 			scanf("%d",&st[i].voti[j]);
 		}
 		
@@ -57,24 +59,25 @@ void carica(s_alunno st [])
 }
 
 
-void carica(s_alunno st [])
+void stampa(s_alunno st [])
 {
 	int i,j;
 
 	for(i=0;i<N;i++)
 	{
-		printf("inserisci numero matricola");
+		printf("numero matricola:\n");
 		printf("%d",st[i].matricola);
-		printf("inserisci il cognome");
-		printf("%s",st[i].cognome[S]);
+		printf("\n");
+		printf("cognome:\n");
+		printf("%s\n",st[i].cognome);
 		
 		for(j=0;j<V;j++)
 		{
-			printf("inserisci un voto"):
-			scanf("%d",&st[i].voti[j]);
+			
+			printf("%d\n",st[i].voti[j]);
 		}
 		
 	}
 	
-	
-}
+ 	
+} 
