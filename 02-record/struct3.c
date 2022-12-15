@@ -15,7 +15,7 @@ gestione array di struct*
 #define S 50       //S = numero di caratteri disponibili per ogni singola stringa
 #define N 2	      // N= numero di record dell' array
 #define MAX 10   //MAX = numero massimo 10
-#efine MIN  0   //MIN = numero minimo 0
+#define MIN  0   //MIN = numero minimo 0
 //definizione struct
 
 struct s_data
