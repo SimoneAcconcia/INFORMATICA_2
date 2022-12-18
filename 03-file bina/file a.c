@@ -1,4 +1,20 @@
-#include <stdio.h>       //inclusione libreria per input output           
+/***********************************************************
+* @brief GESTIONE DEI FILE BINARI                          *
+* <specifiche del progetto>                                *
+* <specifiche del collaudo>                                *
+*                                                          *
+* @author SIMONE ACCONCIA 4^H                              *
+* @date 18/12/2022									       *
+* @version 1.0 <15/12/2022>                                *
+<inserita la prima funzione: void inserisciRecord>         *
+														   *
+/**********************************************************/
+
+
+//inclusione delle librerie
+
+#include <stdio.h>       //inclusione libreria per input output   
+
 #include <stdlib.h>	    /*questa libreria permette l'uso delle funzioni di altre librerie
 						com time.h,limits.h
                         */
@@ -35,9 +51,12 @@ struct studente         //contiene informazioni riguardanti lo studente
 
 
 
-void inserisciRecord(char fileName[], int numRecord); /*inserisce in coda n record con i dati richiesti all’utente. Se il file non esiste va creato 
-                                                        e quindi effettuare l’inserimento. 
-                                                    */ 
+void inserisciRecord(char fileName[], int numRecord); /*inserisce in coda n record con i dati 
+                                                        richiesti all’utente. 
+                                                        Se il file non  esiste va creato 
+                                                        e quindi effettuare l’inserimento. */ 
+
+void stampaFile(char fileName[]);       //Stampa su monitor (una riga per record) tutte le informazioni contenute nel file;             
 
 
 int main()
@@ -97,7 +116,7 @@ void inserisciRecord(char fileName[], int numRecord) // fwrite
         scanf("%d",&buffer.nascita.anno);
 
         fwrite(&buffer,sizeof(struct studente),1,f1);
-        
+
 		fclose(f1);
     }
 
@@ -105,5 +124,62 @@ void inserisciRecord(char fileName[], int numRecord) // fwrite
     {
         printf("impossibile aprire");
     }
+
+}
+
+
+void stampaFile(char fileName[])
+{
+     FILE *f1;
+
+    struct studente buffer;             //dichiarazione della variabile buffer di tipo struct studente
+
+    f1=fopen(fileName,"rb");            //apertura del file binario in lettura
+
+    int j=0;
+
+    if(f1!=0)                           //controllo degli errori sull apertura file
+    {
+        while(!feof(f1))
+         {
+
+            //stampa di tutti i campi di struct data e studente
+            printf("numero matricola: %d\n",buffer.matricola);
+
+            printf("cognome: %s\n",buffer.cognome);
+
+            for(j=0;j<V;j++)
+            {
+                printf("stampa  voti: %d\n",buffer.voti[j]);
+                
+
+            }
+
+            printf("inserisci giorno: %d\n",buffer.nascita.giorno);
+
+            printf("inserisci mese: %s\n",buffer.nascita.mese);
+
+            printf("inserisci anno: %d\n",buffer.nascita.anno);
+
+            fread(&buffer,sizeof(struct studente),1,f1);
+            
+            }
+
+
+
+
+		fclose(f1);
+    }
+
+    else
+    {
+        printf("impossibile aprire");
+    }
+
+
+
+
+
+
 
 }
