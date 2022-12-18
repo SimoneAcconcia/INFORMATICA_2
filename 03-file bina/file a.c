@@ -155,7 +155,7 @@ void stampaFile(char fileName[])
     if(f1!=0)                           //controllo degli errori sull apertura file
     {
         while(!feof(f1))
-         {
+         {   
 
             //stampa di tutti i campi di struct data e studente
             printf("numero matricola: %d\n",buffer.matricola);
