@@ -1,14 +1,13 @@
-/***********************************************************
-* @brief GESTIONE DEI FILE BINARI                          *
-* <specifiche del progetto>                                *
-* <specifiche del collaudo>                                *
-*                                                          *
-* @author SIMONE ACCONCIA 4^H                              *
-* @date 18/12/2022									       *
-* @version 1.0 <15/12/2022>                                *
-<inserita la prima funzione: void inserisciRecord>         *
-														   *
-/**********************************************************/
+/**************************************************************************************************************
+* @brief GESTIONE DEI FILE BINARI                                                                             *
+* <specifiche del progetto>                                                                                   *
+* <specifiche del collaudo>                                                                                   *
+*                                                                                                             *
+* @author SIMONE ACCONCIA 4^H                                                                                 *
+* @date 18/12/2022									                                                          *
+* @version 1.0 <15/12/2022> <inserita la prima funzione: void inserisciRecord>                                *                                                       *
+														                                                      *
+/*************************************************************************************************************/
 
 
 //inclusione delle librerie
@@ -56,7 +55,17 @@ void inserisciRecord(char fileName[], int numRecord); /*inserisce in coda n reco
                                                         Se il file non  esiste va creato 
                                                         e quindi effettuare l’inserimento. */ 
 
-void stampaFile(char fileName[]);       //Stampa su monitor (una riga per record) tutte le informazioni contenute nel file;             
+void stampaFile(char fileName[]);       /*stampa su monitor (una riga per record) tutte le 
+                                          informazioni contenute nel file; */            
+
+int ricercaRecord(char fileName[], char cognome[]);  /*per ogni record che ha il contenuto del 
+                                                       campo cognome uguale al parametro, stampa cognome,
+                                                       età e media dei voti. 
+                                                       La funzione restituisce la posizione 
+                                                       del primo record trovato. 
+                                                       */
+
+                                    
 
 
 int main()
@@ -177,9 +186,65 @@ void stampaFile(char fileName[])
     }
 
 
-
-
-
-
-
 }
+
+
+int ricercaRecord(char fileName[], char cognome[]) //manca il return del record non capito
+ {
+    FILE *f1;
+
+    struct studente buffer;             //dichiarazione della variabile buffer di tipo struct studente
+
+    f1=fopen(fileName,"rb");            //apertura del file binario in lettura
+
+    int j=0;
+
+    int s;                              //variabile per sommare i voti e fare la media
+
+    int m=0;                            //variabile per fare la media
+
+    if(f1!=0)                           //controllo degli errori sull apertura file
+    {
+        while(!feof(f1))
+         {
+            if(strcpm(buffer.cognome,cognome)==0)       //controlla che il contenuto nello struct cognome sia uguale alla variabile cognome
+            {
+                printf("cognome: %s\n",buffer.cognome);
+                s=0;
+              
+
+                for(j=0;j<V;j++)
+                {
+                    s=s+buffer.voti[j];
+                    
+                }
+
+                media=s/V;
+                printf("la media dei voti :%d\n",media);
+
+                printf("inserisci giorno: %d\n",buffer.nascita.giorno);
+
+                printf("inserisci mese: %s\n",buffer.nascita.mese);
+
+                printf("inserisci anno: %d\n",buffer.nascita.anno);
+
+                fread(&buffer,sizeof(struct studente),1,f1);
+            }
+            
+            
+         }
+
+
+
+
+		fclose(f1);
+    }
+
+    else
+    {
+        printf("impossibile aprire");
+    }
+
+    return 
+
+ }
