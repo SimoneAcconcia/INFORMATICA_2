@@ -11,8 +11,6 @@ struct data
     char mese[S];
     int anno ;
 
-
-
 }typedef data;
 
 
@@ -38,7 +36,7 @@ int main()
 {
     FILE *f1;
     char NomeFile[MAX] ={"file.txt"};
-    inserisciRecord(NomeFile,)
+    inserisciRecord(NomeFile,1);
     
 
 
@@ -49,29 +47,29 @@ void inserisciRecord(char fileName[], int numRecord) // fwrite
 {
     FILE *f1;
     struct studente buffer;
-    f1=fopen(NomeFile,"wb");
-    
+    f1=fopen(fileName,"wb");
     int j=0;
     if(f1!=0)
     {
-        prinf("inserisci matricola\n");
-        scanf("%d\n",&buffer.matricola);
-        prinf("inserisci cognome\n");
+        printf("inserisci matricola\n");
+        scanf("%d",&buffer.matricola);
+        printf("\n");
+        printf("inserisci cognome\n");
         scanf("%s",buffer.cognome);
         for(j=0;j<V;j++)
         {
-            prinf("inserisci voti\n");
+            printf("inserisci voti\n");
             scanf("%d",&buffer.voti[j]);
 
         }
-         prinf("inserisci anno\n");
-        scanf("%d",&buffer.nascita.anno);
-        prinf("inserisci mese\n");
+         printf("inserisci giorno\n");
+        scanf("%d",&buffer.nascita.giorno);
+        printf("inserisci mese\n");
         scanf("%s",&buffer.nascita.mese);
-        prinf("inserisci anno\n");
+        printf("inserisci anno\n");
         scanf("%d",&buffer.nascita.anno);
         fwrite(&buffer,sizeof(struct studente),1,f1);
-
+		fclose(f1);
     }
 
     else
