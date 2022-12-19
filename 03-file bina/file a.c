@@ -6,7 +6,7 @@
 * @author SIMONE ACCONCIA 4^H                                                                                 *
 * @date 18/12/2022									                                                          *
 * @version 1.0 <15/12/2022> <inserita la prima funzione: void inserisciRecord>                                *
-* @version 1.1 <18/12/2022> <inserita funzione:stampaFile,ricercaRecord,stampaRecord,correggiRecord>                                                                                                                *
+* @version 1.1 <18/12/2022> <inserita funzione:stampaFile,ricercaRecord,stampaRecord,correggiRecord>          *                                                                                                      *
 *														                                                      *
 /*************************************************************************************************************/
 
@@ -84,6 +84,17 @@ int main()
 
     inserisciRecord(NomeFile,1);                //richiamo della funzione inserisciRecord
     
+    int r;
+    
+    //stampaFile(NomeFile); 
+    
+    //r=stampaRecord(NomeFile, 3);
+    
+   // printf("%d",r);
+
+	//r=correggiRecord(NomeFile, 3); 
+	
+	//printf("%d",r);
 
 
 
@@ -98,6 +109,8 @@ void inserisciRecord(char fileName[], int numRecord) // fwrite
     f1=fopen(fileName,"wb");            //apertura del file binario in scrittura
 
     int j=0;
+    
+    int i;
 
     if(f1!=NULL)                           //controllo degli errori sull apertura file
     {
@@ -156,6 +169,8 @@ void stampaFile(char fileName[])
     f1=fopen(fileName,"rb");            //apertura del file binario in lettura
 
     int j=0;
+    
+    int  n;
 
     if(f1!=NULL)                           //controllo degli errori sull apertura file
     {
@@ -191,6 +206,7 @@ void stampaFile(char fileName[])
                 fclose(f1);
     }
 
+}
     else
     {
         printf("impossibile aprire");
@@ -226,7 +242,7 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
 
             c++;
 
-            if(strcpm(buffer.cognome,cognome)==0)       //controlla che il contenuto nello struct cognome sia uguale alla variabile cognome
+            if(strcmp(buffer.cognome,cognome)==0)       //controlla che il contenuto nello struct cognome sia uguale alla variabile cognome
             
             {
                 pos=c;            
@@ -242,9 +258,9 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
                     
                 }
 
-                media=s/V;
+                m=s/V;
 
-                printf("la media dei voti :%d\n",media);
+                printf("la media dei voti :%d\n",m);
 
                 printf("stampa giorno: %d\n",buffer.nascita.giorno);
 
@@ -310,19 +326,12 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
 
                     printf("stampa anno di nascita: %d\n",buffer.nascita.anno);
 
-                    
-                }
+              	}
+              	
+              	  fclose(f1);
             
-            
-            
-        }
-
-
-
-
-		fclose(f1);
-    }
-
+	}
+	
     else
     {
         printf("impossibile aprire");
@@ -344,6 +353,8 @@ int correggiRecord(char fileName[], int posizione)
     f1=fopen(fileName,"rb");            //apertura del file binario in lettura
 
     int j=0;                            //variabile usata per scorrrere array voti
+    
+    int r;
 
     if(f1!=0)                           //controllo degli errori sull apertura file
     {   
@@ -351,7 +362,7 @@ int correggiRecord(char fileName[], int posizione)
 
         if(r==0)
         {
-            stampaRecord(FileName,acconcia);
+            stampaRecord(fileName,'acconcia');
 
             printf("inserisci matricola\n");
 
@@ -401,7 +412,7 @@ int correggiRecord(char fileName[], int posizione)
 
 }
 
-int numeroRecord(char fileName[])
+/*int numeroRecord(char fileName[])
 {
 
 
@@ -410,5 +421,4 @@ int numeroRecord(char fileName[])
 
     
 }
-
-
+*/
