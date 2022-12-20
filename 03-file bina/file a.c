@@ -85,18 +85,26 @@ int main()
     inserisciRecord(NomeFile,1);                //richiamo della funzione inserisciRecord
     
     int r;
+
+	char stringa [S];
     
-    stampaFile(NomeFile); 
+    //stampaFile(NomeFile); 
     
-    //r=stampaRecord(NomeFile, 3);
+	//r=correggiRecord(NomeFile, 3);
+	
+	printf("inserisci il cognome per effetuare la ricerca\n");
+	
+	scanf("%s",stringa);
+	
+	printf("\n");
+	
+	r=ricercaRecord(NomeFile,stringa);
+	
+	printf("posizione primo record trovato:%d",r);
+
+ 	//r=stampaRecord(NomeFile, 3);
     
    // printf("%d",r);
-
-	//r=correggiRecord(NomeFile, 3); 
-	
-	//printf("%d",r);
-
-
 
 }
 
@@ -248,47 +256,62 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
     int c=0;                            //contatore struct letti
 
     int pos=0;                          //posizione primo record trovato
+    
+    int n;
 
     int s;                              //variabile per sommare i voti e fare la media
 
     int m=0;                            //variabile per fare la media
 
-    if(f1!=0)                           //controllo degli errori sull apertura file
+    if(f1!=NULL)                           //controllo degli errori sull apertura file
     {
         while(!feof(f1))                //finnchè non finisce il primo file
          {
-            fread(&buffer,sizeof(struct studente),1,f1);    //lettura del file di record
-
+            n=fread(&buffer,sizeof(struct studente),1,f1);    //lettura del file di record
+			
             c++;
-
-            if(strcmp(buffer.cognome,cognome)==0)       //controlla che il contenuto nello struct cognome sia uguale alla variabile cognome
+            
+            if(n>0)
             
             {
-                pos=c;            
-
-                printf("cognome: %s\n",buffer.cognome);
-
-                s=0;                                    //inizializzazione variabile somma a 0 per sommare i voti e calcolare la loro media
-              
-
-                for(j=0;j<V;j++)                        //scorro vettore dei voti
-                {
-                    s=s+buffer.voti[j];
-                    
-                }
-
-                m=s/V;
-
-                printf("la media dei voti :%d\n",m);
-
-                printf("stampa giorno: %d\n",buffer.nascita.giorno);
-
-                printf("stampa mese: %s\n",buffer.nascita.mese);
-
-                printf("stampa anno: %d\n",buffer.nascita.anno);
-
-                
-            }
+            	 if(strcmp(buffer.cognome,cognome)==0)       //controlla che il contenuto nello struct cognome sia uguale alla variabile cognome
+            
+		            {
+		                pos=c;            
+		
+		                printf("cognome: %s\n",buffer.cognome);
+		                
+		                printf("\n");
+		
+		                s=0;                                    //inizializzazione variabile somma a 0 per sommare i voti e calcolare la loro media
+		              
+		
+		                for(j=0;j<V;j++)                        //scorro vettore dei voti
+		                {
+		                    s=s+buffer.voti[j];
+		                    
+		                }
+		
+		                m=s/V;
+		
+		                printf("la media dei voti :%d\n",m);
+		                
+		                printf("\n");
+		
+		                printf("stampa giorno: %d\n",buffer.nascita.giorno);
+		                
+		                printf("\n");
+		
+		                printf("stampa mese: %s\n",buffer.nascita.mese);
+		                
+		                printf("\n");
+		
+		                printf("stampa anno: %d\n",buffer.nascita.anno);
+		                
+		                printf("\n");
+		                
+					}
+			}
             
             
          }
