@@ -7,7 +7,8 @@
 * @date 18/12/2022									                                                          *
 * @version 1.0 <15/12/2022> <inserita la prima funzione: void inserisciRecord>                                *
 * @version 1.1 <18/12/2022> <inserita funzione:stampaFile,ricercaRecord,stampaRecord,correggiRecord>          *                                                                                                      *
-* @version 1.2 <19/12/2022> <correzione funzione: ricercaRecord>							                  *
+* @version 1.2 <19/12/2022> <correzione funzione: ricercaRecord>	                                          *
+*@versione 1.3 <20/12/2022>	<correzione errori,inserimento funzione NumeroRecord	                          *
 /*************************************************************************************************************/
 
 
@@ -53,42 +54,80 @@ struct studente
 
 //dichiarazione delle funzioni
 
-void inserisciRecord(char fileName[], int numRecord); /*inserisce in coda n record con i dati 
-                                                        richiesti all’utente, i parametri della funzione 
-                                                        sono: una stringa contenente il nome del file,
-                                                        il numero di record in cui inserire i campi
-                                                     */ 
+/** ****************************************************************************************
+* @brief <la funzione inserisce le informazioni all'interno del record e le scrive su file>
+* @param  <una stringa e un intero(char fileName[], int numRecord)>
+* @retval <>
+* @see <>
+* @author <Simone Acconcia>
+* @version 1.0 <18/12/2022> 
+*******************************************************************************************/
 
-void stampaFile(char fileName[]);                     /*stampa su monitor  tutte le 
-                                                        informazioni contenute nel file
-                                                        i parametri sono: 
-                                                        una stringa contenente il nome del file
-                                                    */            
+void inserisciRecord(char fileName[], int numRecord);
 
-int ricercaRecord(char fileName[], char cognome[]);  /*la funzione controlla che il record abbia il 
-                                                       campo cognome uguale al parametro,in questo caso stampa cognome,
-                                                       età e media dei voti. 
-                                                       La funzione restituisce la posizione 
-                                                       del primo record trovato. 
-                                                       i suoi parametri sono:
-                                                       una stringa contenente il nome del file,
-                                                       una stringa contenente un cognome
-                                                    */
+/** ****************************************************************************************
+* @brief<la funzione stampa sul monitorle informazioni all'interno del record leggendole da file>
+* @param  <una stringa  (char fileName[])>
+* @retval <>
+* @see <>
+* @author <Simone Acconcia>
+* @version 1.0 <18/12/2022> 
+*******************************************************************************************/
+
+
+void stampaFile(char fileName[]);          
+
+/** ****************************************************************************************
+* @brief<la funzione controlla che il record abbia il campo cognome uguale al paramtro cognome, stampando in seuito età e media voti>
+* @param  <due  stringhe  (char fileName[],char cognome[])>
+* @retval <>
+* @see <>
+* @author <Simone Acconcia>
+* @version 1.0 <18/12/2022> 
+* @version 1.1 <19/12/2022>
+* @@version 1.2 <20/12/2022>
+*******************************************************************************************/
+         
+
+int ricercaRecord(char fileName[], char cognome[]);  
+
+/** ****************************************************************************************
+* @brief<stampa le informazioni presenti nel record specificato dal parametro posizione>
+* @param  <una stringa e un intero  (char fileName[],int posizione)>
+* @retval <>
+* @see <>
+* @author <Simone Acconcia>
+* @version 1.0 <18/12/2022> 
+* @version 1.1 <20/12/2022>
+*******************************************************************************************/
+         
                                                        
 
-int stampaRecord(char fileName[], int posizione);   /* stampa le informazioni presenti nel record specificato dal parametro posizione. 
-                                                       Restituisce 0 se il record è presente -1 altrimenti.
-                                                       i parametri della funzione sono  una stringa contenente il nome del file,
-                                                       un intero contenente la posizione del record da stampare
-                                                       */
+int stampaRecord(char fileName[], int posizione);   
+
+/** ****************************************************************************************
+* @brief< visualizza le informazioni del record richiamando la funzione stampaRecord e corregge l’intero record, con i nuovi dati richiesti all’utente>
+* @param  <una stringa e un intero  (char fileName[],int posizione)>
+* @retval <>
+* @see <>
+* @author <Simone Acconcia>
+* @version 1.0 <18/12/2022> 
+* @version 1.1 <19/12/2022>
+* @version 1.2 <20/12/2022>
+*******************************************************************************************/
+         
 
 
-int correggiRecord(char fileName[], int posizione); /*  visualizza le informazioni del record richiamando 
-                                                        la funzione stampaRecord e corregge l’intero record, 
-                                                        con i nuovi dati richiesti all’utente. i parametri sono:
-                                                        una stringa contenente il nome del file,
-                                                        un intero contenente la posizione del record da correggere
-                                                    */
+int correggiRecord(char fileName[], int posizione); 
+
+/** ****************************************************************************************
+* @brief<restituisce il numero di record presenti nel file.>
+* @param  <una stringa  (char fileName[])>
+* @retval <>
+* @see <>
+* @author <Simone Acconcia>
+* @version 1.0 <20/12/2022>
+*******************************************************************************************/
 
 
 int numeroRecord(char fileName[]);
@@ -98,6 +137,9 @@ int numeroRecord(char fileName[]);
 
 int main()
 {
+
+    //dichiarazione variabili
+
     FILE *f1;                                   //puntatore al file
 
     char NomeFile[MAX] ={"file.txt"};           //stringa usata per contenere il nome del file 
@@ -112,13 +154,18 @@ int main()
     
     int s;
 	
-	printf("inserisci il numero di record su cui lavorare\n");
+    //funzione inserimento record
+
+	printf("inserisci il numero di studenti\n");
 	
 	scanf("%d",&pos);
 	
     inserisciRecord(NomeFile,pos); 
-                
+
+    //funzione stampa file
     stampaFile(NomeFile);
+
+    //funzione ricerca record
              
     printf("inserisci il cognome per effetuare la ricerca\n");
             
@@ -127,8 +174,10 @@ int main()
     printf("\n");
                         
     r=ricercaRecord(NomeFile,stringa);
-                        
+                   
     printf("posizione primo record trovato:%d\n",r);
+
+    //funzione  stampaRecord
 
     printf("inserisci il numero di posizione del record per stamparlo\n");
             
@@ -136,7 +185,7 @@ int main()
                         
     r=stampaRecord(NomeFile,pos);
                         
-    if(r==0)
+    if(r==0)        //controllo se il record è stato trovato la funzione restituisce 0
     {
 
     printf("RECORD PRESENTE\n");
@@ -148,9 +197,9 @@ int main()
         printf("RECORD NON TROVATO\n");
     }
                 
-            
+    //funzione correggirecord        
 
-     printf("inserisci la posizione del record da modificare\n");
+    printf("inserisci la posizione del record da modificare\n");
             
     scanf("%d",&pos);
                                 
@@ -158,19 +207,13 @@ int main()
                                 
     r=correggiRecord(NomeFile,pos);
 
-  
+    //funzione numero record
+    
+    r=numeroRecord(NomeFile);
+
+    printf("il numero di record : %d\n",r);
     
    
-
-            
-              
-                       
-              
-
-
-	
-	
-    
     
 
 }
@@ -256,11 +299,11 @@ void stampaFile(char fileName[])
 
     f1=fopen(fileName,"rb");            //apertura del file binario in lettura
 
-    int j;
+    int j;                              //contatore per scorrere array voti
     
-    int  n;                             ////variabile per controllare se il file è stato letto
+    int  n;                             //variabile per controllare se il file è stato letto
 
-    if(f1!=NULL)                           //controllo degli errori sull apertura file
+    if(f1!=NULL)                        //controllo degli errori sull apertura file
     {
         while(!feof(f1))
          {   
@@ -324,7 +367,7 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
 
     f1=fopen(fileName,"rb");            //apertura del file binario in lettura
 
-    int j=0;                            //contatore per il for voti
+    int j=0;                            //contatore per il scorrere array di voti
 
     int c=0;                            //contatore struct letti
 
@@ -367,8 +410,10 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
 		                    
 		                }
 		
-		                m=s/V;
-		
+		                m=s/V;                                  //calcolo media
+
+                        //stampa della media e età
+
 		                printf("la media dei voti :%d\n",m);
 		                
 		                printf("\n");
@@ -399,7 +444,7 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
         printf("impossibile aprire");
     }
 
-    return pos;
+    return pos;                                         //restituisce la posizione del record
 
 }
 
@@ -413,7 +458,7 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
 
     int r;                              //dichiarazione variabile usata per richiamre funzione fseek
 
-    int n;                              ////variabile per controllare se il file è stato letto
+    int n;                              //variabile per controllare se il file è stato letto
 
     int j=0;                           //variabile usata per scorrrere array voti
     
@@ -545,14 +590,41 @@ int correggiRecord(char fileName[], int posizione)
 
 }
 
-/*int numeroRecord(char fileName[])
+
+
+int numeroRecord(char fileName[])
 {
+	struct studente buffer;							    //dichiarazione di un record
 
+	int r;			                                    //variabile per controllo errori
 
-
-
-
+	int n=sizeof(buffer);								/*con la funzione sizeof ho la grandezza in 
+                                                          byte del buffer
+                                                        */
     
+	int numerorecord;								    //numero record presenti
+
+	FILE* f1;											//puntatore al file
+	
+	f1=fopen(fileName,"rb");						    //apertura del file binario in lettura
+	
+	if(f1!=NULL)										//se il file si apre
+	{
+		r=fseek(f1,0,2);								//posiziona il punatore alla fine del file
+
+		r=ftell(f1);									//restituisce un intero che é la posizione corrente del puntatore.
+		
+		numerorecord=r/n;								//divido r e n per trovare il numero di record
+		
+		fclose(f1);									    //chude il file
+		
+		return numerorecord;							//restituisce il numero di record
+		
+	}
+	else													
+	{
+		printf("impossibile aprire il file");
+		                                   
+	}
 }
 
-*/
