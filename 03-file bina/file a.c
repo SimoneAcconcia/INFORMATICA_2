@@ -23,7 +23,7 @@
 //define
 #define S 50            //costante con 50 utilizzata per definire spazio delle stringhe
 
-#define V 3             //costante usata per l'array voti contenuto in struct studente
+#define V 8             //costante usata per l'array voti contenuto in struct studente
 
 #define MAX 50          //costante con 50 utilizzata per definire spazio delle stringhe
 
@@ -85,6 +85,10 @@ int main()
     inserisciRecord(NomeFile,1);                //richiamo della funzione inserisciRecord
     
     int r;
+    
+    int i=0;
+    
+    int pos;
 
 	char stringa [S];
     
@@ -101,10 +105,27 @@ int main()
 	r=ricercaRecord(NomeFile,stringa);
 	
 	printf("posizione primo record trovato:%d",r);
-
- 	//r=stampaRecord(NomeFile, 3);
+	
+	
+/*	printf("inserisci il numero di posizione del record per stamparlo\n");
+	
+	scanf("%d",&pos);
+	
+ 	r=stampaRecord(NomeFile,pos);
+ 	
+ 	if(r==0)
+ 	{
+ 		printf("RECORD PRESENTE\n");
+ 		
+ 		
+	}
+	
+    else
+    {
+    	printf("RECORD NON TROVATO\n");
+	}
+    */
     
-   // printf("%d",r);
 
 }
 
@@ -209,11 +230,13 @@ void stampaFile(char fileName[])
 
                 for(j=0;j<V;j++)
                 {
-                    printf("stampa  voti: %d\n",buffer.voti[j]);
-                    printf("\n");
+                    printf("voti: %d\t\t",buffer.voti[j]);
+                    
                     
                 }
-
+                
+                printf("\n");
+                
                 printf("stampa giorno: %d\n",buffer.nascita.giorno);
                 
                 printf("\n");
@@ -342,6 +365,8 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
     int r;                              //dichiarazione variabile usata per richiamre funzione fseek
 
     int j=0;                           //variabile usata per scorrrere array voti
+    
+  
 
     if(f1!=0)                          //controllo degli errori sull apertura file
     {
@@ -351,6 +376,7 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
             if(r==0)
                 {
                     fread(&buffer,sizeof(struct studente),1,f1);
+                
                     printf("numero matricola: %d\n",buffer.matricola);
 
                     printf("cognome: %s\n",buffer.cognome);
@@ -367,6 +393,8 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
                     printf("stampa mese di nascita: %s\n",buffer.nascita.mese);
 
                     printf("stampa anno di nascita: %d\n",buffer.nascita.anno);
+                    
+                    return 0;
 
               	}
               	
@@ -379,7 +407,7 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
         printf("impossibile aprire");
     }
 
-
+	return -1;
 
 }
 
@@ -388,7 +416,7 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
 int correggiRecord(char fileName[], int posizione)
 {
 
-     FILE *f1;
+    FILE *f1;
 
     struct studente buffer;             //dichiarazione della variabile buffer di tipo struct studente
 
