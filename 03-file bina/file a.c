@@ -112,10 +112,10 @@ int main()
     
     int s;
 
-     inserisciRecord(NomeFile,1); 
+    inserisciRecord(NomeFile,1); 
                 
     stampaFile(NomeFile);
-              
+             
     printf("inserisci il cognome per effetuare la ricerca\n");
             
     scanf("%s",stringa);
@@ -124,7 +124,7 @@ int main()
                         
     r=ricercaRecord(NomeFile,stringa);
                         
-    printf("posizione primo record trovato:%d",r);
+    printf("posizione primo record trovato:%d\n",r);
 
     printf("inserisci il numero di posizione del record per stamparlo\n");
             
@@ -228,8 +228,10 @@ void inserisciRecord(char fileName[], int numRecord) // fwrite
             printf("\n");
 
             fwrite(&buffer,sizeof(struct studente),1,f1);   /*con fwrite scrivo tutti i campi richiesti sopra 
-    }                                                         su file
-                                                            */      
+                                                             su file
+                                                            */
+															
+		}
 
 		fclose(f1);                                         //chiusura file
     }
@@ -291,7 +293,7 @@ void stampaFile(char fileName[])
 
                 printf("stampa anno: %d\n",buffer.nascita.anno);
                 
-                printf("\n");
+                
 
            
             
@@ -385,9 +387,6 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
             
          }
 
-
-
-
 		fclose(f1);
     }
 
@@ -478,9 +477,9 @@ int correggiRecord(char fileName[], int posizione)
     
     int r;                              //controllo errori
 
-   int pos                              //posizione record
+   int pos;                              //posizione record
 
-    if(f1!=0)                           //controllo degli errori sull apertura file
+    if(f1!=NULL)                           //controllo degli errori sull apertura file
     {   
         r=fseek(f1,posizione*sizeof(struct studente),SEEK_SET); //uso fseek per posizionarmi sullo struct 
 
@@ -488,7 +487,7 @@ int correggiRecord(char fileName[], int posizione)
         if(r==0)                        //controllo errori fseek
         {
 
-            printf("inserisci la posizione del record")
+            printf("inserisci la posizione del record");
 
             scanf("%d",&pos);
 
@@ -551,4 +550,5 @@ int correggiRecord(char fileName[], int posizione)
 
     
 }
+
 */
