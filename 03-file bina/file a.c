@@ -7,7 +7,7 @@
 * @date 18/12/2022									                                                          *
 * @version 1.0 <15/12/2022> <inserita la prima funzione: void inserisciRecord>                                *
 * @version 1.1 <18/12/2022> <inserita funzione:stampaFile,ricercaRecord,stampaRecord,correggiRecord>          *                                                                                                      *
-*														                                                      *
+* @version 1.2 <19/12/2022> <correzione funzione: ricercaRecord>							                  *
 /*************************************************************************************************************/
 
 
@@ -15,19 +15,20 @@
 
 #include <stdio.h>       //inclusione libreria per input output   
 
-#include <stdlib.h>	    /*questa libreria permette l'uso delle funzioni di altre librerie
-						com time.h,limits.h
-                        */
+#include <stdlib.h>	    //per l'utilizzo di system
+
 #include <string.h>     //inclusione libreria per le stringhe
 
+
 //define
-#define S 50            //costante con 50 utilizzata per definire spazio delle stringhe
+#define S 50            //costante  utilizzata per definire spazio delle stringhe
 
 #define V 8             //costante usata per l'array voti contenuto in struct studente
 
-#define MAX 50          //costante con 50 utilizzata per definire spazio delle stringhe
+#define MAX 50          //costante con 50 utilizzata per definire spazio delle stringhe contenenti il nome del file
 
-//struct
+
+//dichiarazione dei campi di struct data
 
 struct data              //struct data contiene informazioni sulla data di nascita
 {
@@ -38,9 +39,10 @@ struct data              //struct data contiene informazioni sulla data di nasci
 }typedef data;
 
 
+//dichiarazione dei campi di struct studente
 
 
-struct studente         //contiene informazioni riguardanti lo studente    
+struct studente        
 {
     int matricola;
     char cognome[S];
@@ -49,27 +51,45 @@ struct studente         //contiene informazioni riguardanti lo studente
 
 }typedef studente;
 
-
+//dichiarazione delle funzioni
 
 void inserisciRecord(char fileName[], int numRecord); /*inserisce in coda n record con i dati 
-                                                        richiesti all’utente. 
-                                                        Se il file non  esiste va creato 
-                                                        e quindi effettuare l’inserimento. */ 
+                                                        richiesti all’utente, i parametri della funzione 
+                                                        sono: una stringa contenente il nome del file,
+                                                        il numero di record in cui inserire i campi
+                                                     */ 
 
-void stampaFile(char fileName[]);                     /*stampa su monitor (una riga per record) tutte le 
-                                                        informazioni contenute nel file; */            
+void stampaFile(char fileName[]);                     /*stampa su monitor  tutte le 
+                                                        informazioni contenute nel file
+                                                        i parametri sono: 
+                                                        una stringa contenente il nome del file
+                                                    */            
 
-int ricercaRecord(char fileName[], char cognome[]);  /*per ogni record che ha il contenuto del 
-                                                       campo cognome uguale al parametro, stampa cognome,
+int ricercaRecord(char fileName[], char cognome[]);  /*la funzione controlla che il record abbia il 
+                                                       campo cognome uguale al parametro,in questo caso stampa cognome,
                                                        età e media dei voti. 
                                                        La funzione restituisce la posizione 
                                                        del primo record trovato. 
-                                                       */
+                                                       i suoi parametri sono:
+                                                       una stringa contenente il nome del file,
+                                                       una stringa contenente un cognome
+                                                    */
                                                        
 
-int stampaRecord(char fileName[], int posizione);
+int stampaRecord(char fileName[], int posizione);   /* stampa le informazioni presenti nel record specificato dal parametro posizione. 
+                                                       Restituisce 0 se il record è presente -1 altrimenti.
+                                                       i parametri della funzione sono  una stringa contenente il nome del file,
+                                                       un intero contenente la posizione del record da stampare
+                                                       */
 
-int correggiRecord(char fileName[], int posizione); 
+
+int correggiRecord(char fileName[], int posizione); /*  visualizza le informazioni del record richiamando 
+                                                        la funzione stampaRecord e corregge l’intero record, 
+                                                        con i nuovi dati richiesti all’utente. i parametri sono:
+                                                        una stringa contenente il nome del file,
+                                                        un intero contenente la posizione del record da correggere
+                                                    */
+
 
 int numeroRecord(char fileName[]);
 
@@ -84,30 +104,41 @@ int main()
 
     inserisciRecord(NomeFile,1);                //richiamo della funzione inserisciRecord
     
-    int r;
-    
-    int i=0;
-    
-    int pos;
+    int r;                                      //usata per richiamare funzioni di tipo int
 
-	char stringa [S];
+    int pos;                                    //usata per la posizione del record
+
+    int scelta;                                 //usata per fare una scelta all'interno del menù dello switch case
+
+	char stringa [S];                           //usata come parametro cognome all'interno delle funzioni
     
-    //stampaFile(NomeFile); 
+    printf("1: inserisci record\n");
+
+	printf("2: stampa record\n");
+
+    printf("3: ricerca record");
+
+    printf("4: stampa del record");
+
+    printf("5: correzzione record");
+
+    scanf("%d",&s);
+
+    switch(s)
+    {
+        case 1:
+                inserisciRecord(NomeFile,1); 
+        break
+
+
+
+
+
+    }
     
-	//r=correggiRecord(NomeFile, 3);
-	
-	printf("inserisci il cognome per effetuare la ricerca\n");
-	
-	scanf("%s",stringa);
-	
-	printf("\n");
-	
-	r=ricercaRecord(NomeFile,stringa);
-	
-	printf("posizione primo record trovato:%d",r);
-	
-	
-/*	printf("inserisci il numero di posizione del record per stamparlo\n");
+
+
+	printf("inserisci il numero di posizione del record per stamparlo\n");
 	
 	scanf("%d",&pos);
 	
@@ -124,7 +155,20 @@ int main()
     {
     	printf("RECORD NON TROVATO\n");
 	}
-    */
+	
+	
+	/*printf("inserisci la posizione del record da modificare\n");
+	
+	scanf("%d",&pos);
+	
+	printf("\n");
+	
+	r=correggiRecord(NomeFile,pos);
+	
+	
+	*/
+	
+    
     
 
 }
@@ -370,7 +414,7 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
     
   
 
-    if(f1!=0)                          //controllo degli errori sull apertura file
+    if(f1!=NULL)                          //controllo degli errori sull apertura file
     {
                
          r=fseek(f1,posizione*sizeof(struct studente),SEEK_SET);    //uso fseek per posizionarmi sullostruct
@@ -399,12 +443,12 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
                         printf("stampa anno di nascita: %d\n",buffer.nascita.anno);
 
                     }
-
+						return 0;
               	}
               	
               	  fclose(f1);
 
-                  return 0;
+                
             
 	}
 	
