@@ -364,6 +364,8 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
 
     int r;                              //dichiarazione variabile usata per richiamre funzione fseek
 
+    int n;
+
     int j=0;                           //variabile usata per scorrrere array voti
     
   
@@ -371,34 +373,38 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
     if(f1!=0)                          //controllo degli errori sull apertura file
     {
                
-         r=fseek(f1,posizione*sizeof(struct studente),SEEK_SET);    //uso fseek per posizionarmi 
+         r=fseek(f1,posizione*sizeof(struct studente),SEEK_SET);    //uso fseek per posizionarmi sullostruct
 
             if(r==0)
                 {
-                    fread(&buffer,sizeof(struct studente),1,f1);
-                
-                    printf("numero matricola: %d\n",buffer.matricola);
+                    n=fread(&buffer,sizeof(struct studente),1,f1);
 
-                    printf("cognome: %s\n",buffer.cognome);
-
-                    for(j=0;j<V;j++)
+                    if(n>0)     
                     {
-                        printf("stampa  voti: %d\n",buffer.voti[j]);
-                        
+                        printf("numero matricola: %d\n",buffer.matricola);
+
+                        printf("cognome: %s\n",buffer.cognome);
+
+                        for(j=0;j<V;j++)
+                        {
+                            printf("stampa  voti: %d\n",buffer.voti[j]);
+                            
+
+                        }
+
+                        printf("stampa giorno di nascita: %d\n",buffer.nascita.giorno);
+
+                        printf("stampa mese di nascita: %s\n",buffer.nascita.mese);
+
+                        printf("stampa anno di nascita: %d\n",buffer.nascita.anno);
 
                     }
-
-                    printf("stampa giorno di nascita: %d\n",buffer.nascita.giorno);
-
-                    printf("stampa mese di nascita: %s\n",buffer.nascita.mese);
-
-                    printf("stampa anno di nascita: %d\n",buffer.nascita.anno);
-                    
-                    return 0;
 
               	}
               	
               	  fclose(f1);
+
+                  return 0;
             
 	}
 	
