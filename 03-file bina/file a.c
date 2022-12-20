@@ -111,8 +111,12 @@ int main()
 	char stringa [S];                           //usata come parametro cognome all'interno delle funzioni
     
     int s;
-
-    inserisciRecord(NomeFile,1); 
+	
+	printf("inserisci il numero di record su cui lavorare\n");
+	
+	scanf("%d",&pos);
+	
+    inserisciRecord(NomeFile,pos); 
                 
     stampaFile(NomeFile);
              
@@ -298,8 +302,7 @@ void stampaFile(char fileName[])
            
             
             }
-                
-                fclose(f1);
+                 
     }
 
 }
@@ -308,6 +311,7 @@ void stampaFile(char fileName[])
         printf("impossibile aprire");
     }
 
+	fclose(f1);
 
 }
 
@@ -487,7 +491,7 @@ int correggiRecord(char fileName[], int posizione)
         if(r==0)                        //controllo errori fseek
         {
 
-            printf("inserisci la posizione del record");
+            printf("inserisci la posizione del record da stampare");
 
             scanf("%d",&pos);
 
