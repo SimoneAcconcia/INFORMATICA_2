@@ -101,8 +101,6 @@ int main()
     FILE *f1;                                   //puntatore al file
 
     char NomeFile[MAX] ={"file.txt"};           //stringa usata per contenere il nome del file 
-
-    inserisciRecord(NomeFile,1);                //richiamo della funzione inserisciRecord
     
     int r;                                      //usata per richiamare funzioni di tipo int
 
@@ -112,61 +110,61 @@ int main()
 
 	char stringa [S];                           //usata come parametro cognome all'interno delle funzioni
     
-    printf("1: inserisci record\n");
+    int s;
 
-	printf("2: stampa record\n");
+     inserisciRecord(NomeFile,1); 
+                
+    stampaFile(NomeFile);
+              
+    printf("inserisci il cognome per effetuare la ricerca\n");
+            
+    scanf("%s",stringa);
+            
+    printf("\n");
+                        
+    r=ricercaRecord(NomeFile,stringa);
+                        
+    printf("posizione primo record trovato:%d",r);
 
-    printf("3: ricerca record");
-
-    printf("4: stampa del record");
-
-    printf("5: correzzione record");
-
-    scanf("%d",&s);
-
-    switch(s)
+    printf("inserisci il numero di posizione del record per stamparlo\n");
+            
+    scanf("%d",&pos);
+                        
+    r=stampaRecord(NomeFile,pos);
+                        
+    if(r==0)
     {
-        case 1:
-                inserisciRecord(NomeFile,1); 
-        break
 
-
-
-
-
+    printf("RECORD PRESENTE\n");
+                         
     }
-    
-
-
-	printf("inserisci il numero di posizione del record per stamparlo\n");
-	
-	scanf("%d",&pos);
-	
- 	r=stampaRecord(NomeFile,pos);
- 	
- 	if(r==0)
- 	{
- 		printf("RECORD PRESENTE\n");
- 		
- 		
-	}
-	
+                        
     else
     {
-    	printf("RECORD NON TROVATO\n");
-	}
+        printf("RECORD NON TROVATO\n");
+    }
+                
+            
+
+     printf("inserisci la posizione del record da modificare\n");
+            
+    scanf("%d",&pos);
+                                
+    printf("\n");
+                                
+    r=correggiRecord(NomeFile,pos);
+
+  
+    
+   
+
+            
+              
+                       
+              
+
+
 	
-	
-	/*printf("inserisci la posizione del record da modificare\n");
-	
-	scanf("%d",&pos);
-	
-	printf("\n");
-	
-	r=correggiRecord(NomeFile,pos);
-	
-	
-	*/
 	
     
     
@@ -175,63 +173,65 @@ int main()
 
 void inserisciRecord(char fileName[], int numRecord) // fwrite
 {
-    FILE *f1;
+    FILE *f1;                           //puntatore al file
 
     struct studente buffer;             //dichiarazione della variabile buffer di tipo struct studente
 
     f1=fopen(fileName,"wb");            //apertura del file binario in scrittura
 
-    int j=0;
+    int j;                              //contatore ciclo for per array di voti                        
     
-    int i;
+    int i;                              //contatore ciclo for per il numero di record
 
-    if(f1!=NULL)                           //controllo degli errori sull apertura file
+    if(f1!=NULL)                        //controllo degli errori sull apertura file
     {
         for(i=0;i<numRecord;i++)
 
-       { //inserimento di tutti i campi di struct data e studente
-        printf("inserisci matricola\n");
+       { 
+            //inserimento di tutti i campi di struct data e studente
+            printf("inserisci matricola\n");
 
-        scanf("%d",&buffer.matricola);
+            scanf("%d",&buffer.matricola);
 
-        printf("\n");
+            printf("\n");
 
-        printf("inserisci cognome\n");
+            printf("inserisci cognome\n");
 
-        scanf("%s",buffer.cognome);
+            scanf("%s",buffer.cognome);
 
-        for(j=0;j<V;j++)
-        {
-            printf("inserisci voti\n");
-            scanf("%d",&buffer.voti[j]);
-         
+            for(j=0;j<V;j++)
+            {
+                printf("inserisci voti\n");
+                scanf("%d",&buffer.voti[j]);
+            
 
-        }
-		
-		printf("\n");
-		
-        printf("inserisci giorno\n");
+            }
+            
+            printf("\n");
+            
+            printf("inserisci giorno\n");
 
-        scanf("%d",&buffer.nascita.giorno);
-        
-        printf("\n");
+            scanf("%d",&buffer.nascita.giorno);
+            
+            printf("\n");
 
-        printf("inserisci mese\n");
+            printf("inserisci mese\n");
 
-        scanf("%s",&buffer.nascita.mese);
-        
-        printf("\n");
+            scanf("%s",&buffer.nascita.mese);
+            
+            printf("\n");
 
-        printf("inserisci anno\n");
+            printf("inserisci anno\n");
 
-        scanf("%d",&buffer.nascita.anno);
-        
-        printf("\n");
+            scanf("%d",&buffer.nascita.anno);
+            
+            printf("\n");
 
-        fwrite(&buffer,sizeof(struct studente),1,f1);
-    }
+            fwrite(&buffer,sizeof(struct studente),1,f1);   /*con fwrite scrivo tutti i campi richiesti sopra 
+    }                                                         su file
+                                                            */      
 
-		fclose(f1);
+		fclose(f1);                                         //chiusura file
     }
 
     else
@@ -244,23 +244,23 @@ void inserisciRecord(char fileName[], int numRecord) // fwrite
 
 void stampaFile(char fileName[])
 {
-     FILE *f1;
+    FILE *f1;                           //puntatore al file
 
     struct studente buffer;             //dichiarazione della variabile buffer di tipo struct studente
 
     f1=fopen(fileName,"rb");            //apertura del file binario in lettura
 
-    int j=0;
+    int j;
     
-    int  n;
+    int  n;                             ////variabile per controllare se il file è stato letto
 
     if(f1!=NULL)                           //controllo degli errori sull apertura file
     {
         while(!feof(f1))
          {   
-                n=fread(&buffer,sizeof(struct studente),1,f1);
+                n=fread(&buffer,sizeof(struct studente),1,f1);      //lettura del file
             
-                if(n>0)                    //stampa solo una volta l'ultimo record
+                if(n>0)                    //controllo se il file è stato letto
             {
                 //stampa di tutti i campi di struct data e studente
 
@@ -312,7 +312,7 @@ void stampaFile(char fileName[])
 
 int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi restituisco la posizione dell'ultimo trovato
  {
-    FILE *f1;
+    FILE *f1;                           //puntatore al file
 
     struct studente buffer;             //dichiarazione della variabile buffer di tipo struct studente
 
@@ -324,27 +324,29 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
 
     int pos=0;                          //posizione primo record trovato
     
-    int n;
+    int n;                              ////variabile per controllare se il file è stato letto
 
     int s;                              //variabile per sommare i voti e fare la media
 
     int m=0;                            //variabile per fare la media
 
-    if(f1!=NULL)                           //controllo degli errori sull apertura file
+    if(f1!=NULL)                        //controllo degli errori sull apertura file
     {
         while(!feof(f1))                //finnchè non finisce il primo file
          {
             n=fread(&buffer,sizeof(struct studente),1,f1);    //lettura del file di record
 			
-            c++;
+            c++;                                              //incremento contatore
             
-            if(n>0)
+            if(n>0)                    //controllo che il file è stato letto
             
             {
-            	 if(strcmp(buffer.cognome,cognome)==0)       //controlla che il contenuto nello struct cognome sia uguale alla variabile cognome
+            	 if(strcmp(buffer.cognome,cognome)==0)       //controlla che il contenuto nel buffer cognome sia uguale alla variabile cognome
             
 		            {
-		                pos=c;            
+		                pos=c;                              /*passo il valore del contatore nella variabile
+                                                              pos in modo tale da saper la posizione del record
+                                                            */
 		
 		                printf("cognome: %s\n",buffer.cognome);
 		                
@@ -355,7 +357,7 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
 		
 		                for(j=0;j<V;j++)                        //scorro vettore dei voti
 		                {
-		                    s=s+buffer.voti[j];
+		                    s=s+buffer.voti[j];                 //somma dei voti
 		                    
 		                }
 		
@@ -400,7 +402,7 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
 
 int stampaRecord(char fileName[], int posizione) //chiedi spiegazione 
 {
-    FILE *f1;
+    FILE *f1;                           //puntatore al file
 
     struct studente buffer;             //dichiarazione della variabile buffer di tipo struct studente
 
@@ -408,7 +410,7 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
 
     int r;                              //dichiarazione variabile usata per richiamre funzione fseek
 
-    int n;
+    int n;                              ////variabile per controllare se il file è stato letto
 
     int j=0;                           //variabile usata per scorrrere array voti
     
@@ -417,13 +419,13 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
     if(f1!=NULL)                          //controllo degli errori sull apertura file
     {
                
-         r=fseek(f1,posizione*sizeof(struct studente),SEEK_SET);    //uso fseek per posizionarmi sullostruct
+         r=fseek(f1,posizione*sizeof(struct studente),SEEK_SET);    //uso fseek per posizionarmi sullo struct 
 
-            if(r==0)
+            if(r==0)                                                //controllo errori fseek
                 {
-                    n=fread(&buffer,sizeof(struct studente),1,f1);
+                    n=fread(&buffer,sizeof(struct studente),1,f1);  //lettura file
 
-                    if(n>0)     
+                    if(n>0)                                         //controllo che il file è stato letto
                     {
                         printf("numero matricola: %d\n",buffer.matricola);
 
@@ -443,7 +445,7 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
                         printf("stampa anno di nascita: %d\n",buffer.nascita.anno);
 
                     }
-						return 0;
+						return 0;                        //return 0  se il record è stato trovato                 
               	}
               	
               	  fclose(f1);
@@ -457,7 +459,7 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
         printf("impossibile aprire");
     }
 
-	return -1;
+	return -1;                                      //return -1 se il record non è stato trovato
 
 }
 
@@ -466,7 +468,7 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
 int correggiRecord(char fileName[], int posizione)
 {
 
-    FILE *f1;
+    FILE *f1;                            //puntatore al file
 
     struct studente buffer;             //dichiarazione della variabile buffer di tipo struct studente
 
@@ -474,15 +476,23 @@ int correggiRecord(char fileName[], int posizione)
 
     int j=0;                            //variabile usata per scorrrere array voti
     
-    int r;
+    int r;                              //controllo errori
+
+   int pos                              //posizione record
 
     if(f1!=0)                           //controllo degli errori sull apertura file
     {   
-        r=fseek(f1,posizione*sizeof(struct studente),SEEK_SET);
+        r=fseek(f1,posizione*sizeof(struct studente),SEEK_SET); //uso fseek per posizionarmi sullo struct 
 
-        if(r==0)
+
+        if(r==0)                        //controllo errori fseek
         {
-            stampaRecord(fileName,'acconcia');
+
+            printf("inserisci la posizione del record")
+
+            scanf("%d",&pos);
+
+            stampaRecord(fileName,pos);
 
             printf("inserisci matricola\n");
 
@@ -516,7 +526,7 @@ int correggiRecord(char fileName[], int posizione)
 
             r=fseek(f1,posizione*sizeof(struct studente),SEEK_SET);
             
-            fwrite(&buffer,sizeof(struct studente),1,f1);
+            fwrite(&buffer,sizeof(struct studente),1,f1);       //scrittura su file dei campi inseriti sopra
         
         }
 
