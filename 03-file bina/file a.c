@@ -86,7 +86,7 @@ int main()
     
     int r;
     
-    //stampaFile(NomeFile); 
+    stampaFile(NomeFile); 
     
     //r=stampaRecord(NomeFile, 3);
     
@@ -131,20 +131,29 @@ void inserisciRecord(char fileName[], int numRecord) // fwrite
         {
             printf("inserisci voti\n");
             scanf("%d",&buffer.voti[j]);
+         
 
         }
-
+		
+		printf("\n");
+		
         printf("inserisci giorno\n");
 
         scanf("%d",&buffer.nascita.giorno);
+        
+        printf("\n");
 
         printf("inserisci mese\n");
 
         scanf("%s",&buffer.nascita.mese);
+        
+        printf("\n");
 
         printf("inserisci anno\n");
 
         scanf("%d",&buffer.nascita.anno);
+        
+        printf("\n");
 
         fwrite(&buffer,sizeof(struct studente),1,f1);
     }
@@ -183,21 +192,31 @@ void stampaFile(char fileName[])
                 //stampa di tutti i campi di struct data e studente
 
                 printf("numero matricola: %d\n",buffer.matricola);
+                
+                printf("\n");
 
                 printf("cognome: %s\n",buffer.cognome);
+                
+                printf("\n");
 
                 for(j=0;j<V;j++)
                 {
                     printf("stampa  voti: %d\n",buffer.voti[j]);
+                    printf("\n");
                     
-
                 }
 
                 printf("stampa giorno: %d\n",buffer.nascita.giorno);
+                
+                printf("\n");
 
                 printf("stampa mese: %s\n",buffer.nascita.mese);
+                
+                printf("\n");
 
                 printf("stampa anno: %d\n",buffer.nascita.anno);
+                
+                printf("\n");
 
            
             
