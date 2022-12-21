@@ -163,6 +163,7 @@ int main()
     inserisciRecord(NomeFile,pos); 
 
     //funzione stampa file
+
     stampaFile(NomeFile);
 
     //funzione ricerca record
@@ -236,6 +237,7 @@ void inserisciRecord(char fileName[], int numRecord) // fwrite
 
        { 
             //inserimento di tutti i campi di struct data e studente
+
             printf("inserisci matricola\n");
 
             scanf("%d",&buffer.matricola);
@@ -283,7 +285,7 @@ void inserisciRecord(char fileName[], int numRecord) // fwrite
 		fclose(f1);                                         //chiusura file
     }
 
-    else
+    else                                                    //se non è  possibile aprire il file da un messaggio di errore
     {
         printf("impossibile aprire");
     }
@@ -305,7 +307,7 @@ void stampaFile(char fileName[])
 
     if(f1!=NULL)                        //controllo degli errori sull apertura file
     {
-        while(!feof(f1))
+        while(!feof(f1))                //ripete finchè non è finito il file
          {   
                 n=fread(&buffer,sizeof(struct studente),1,f1);      //lettura del file
             
@@ -349,12 +351,12 @@ void stampaFile(char fileName[])
     }
 
 }
-    else
+    else                        //se non è  possibile aprire il file da un messaggio di errore
     {
         printf("impossibile aprire");
     }
 
-	fclose(f1);
+	fclose(f1);                 //chiusura del file
 
 }
 
@@ -373,7 +375,7 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
 
     int pos=0;                          //posizione primo record trovato
     
-    int n;                              ////variabile per controllare se il file è stato letto
+    int n;                              //variabile per controllare se il file è stato letto
 
     int s;                              //variabile per sommare i voti e fare la media
 
@@ -381,7 +383,7 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
 
     if(f1!=NULL)                        //controllo degli errori sull apertura file
     {
-        while(!feof(f1))                //finnchè non finisce il primo file
+        while(!feof(f1))                //finchè non finisce il primo file
          {
             n=fread(&buffer,sizeof(struct studente),1,f1);    //lettura del file di record
 			
@@ -390,7 +392,9 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
             if(n>0)                    //controllo che il file è stato letto
             
             {
-            	 if(strcmp(buffer.cognome,cognome)==0)       //controlla che il contenuto nel buffer cognome sia uguale alla variabile cognome
+            	 if(strcmp(buffer.cognome,cognome)==0)       /*controlla che il contenuto nel buffer cognome sia uguale alla variabile cognome con strcmp
+                                                                che restituisce 0 se le due stringhe sono uguali
+                                                            */
             
 		            {
 		                pos=c;                              /*passo il valore del contatore nella variabile
@@ -436,10 +440,10 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
             
          }
 
-		fclose(f1);
+		fclose(f1);             //chiusura file
     }
 
-    else
+    else                        //se non è  possibile aprire il file da un messaggio di errore
     {
         printf("impossibile aprire");
     }
@@ -448,7 +452,7 @@ int ricercaRecord(char fileName[], char cognome[]) //se esistono più cognomi re
 
 }
 
-int stampaRecord(char fileName[], int posizione) //chiedi spiegazione 
+int stampaRecord(char fileName[], int posizione) 
 {
     FILE *f1;                           //puntatore al file
 
@@ -464,7 +468,7 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
     
   
 
-    if(f1!=NULL)                          //controllo degli errori sull apertura file
+    if(f1!=NULL)                       //controllo degli errori sull apertura file
     {
                
          r=fseek(f1,posizione*sizeof(struct studente),SEEK_SET);    //uso fseek per posizionarmi sullo struct 
@@ -496,13 +500,13 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
 						return 0;                        //return 0  se il record è stato trovato                 
               	}
               	
-              	  fclose(f1);
+              	  fclose(f1);                           //chiusura file
 
                 
             
 	}
 	
-    else
+    else                                                //se non è  possibile aprire il file da un messaggio di errore
     {
         printf("impossibile aprire");
     }
@@ -516,7 +520,7 @@ int stampaRecord(char fileName[], int posizione) //chiedi spiegazione
 int correggiRecord(char fileName[], int posizione)
 {
 
-    FILE *f1;                            //puntatore al file
+    FILE *f1;                           //puntatore al file
 
     struct studente buffer;             //dichiarazione della variabile buffer di tipo struct studente
 
@@ -526,21 +530,24 @@ int correggiRecord(char fileName[], int posizione)
     
     int r;                              //controllo errori
 
-   int pos;                              //posizione record
+    int pos;                            //posizione record
 
-    if(f1!=NULL)                           //controllo degli errori sull apertura file
+    if(f1!=NULL)                        //controllo degli errori sull apertura file
     {   
         r=fseek(f1,posizione*sizeof(struct studente),SEEK_SET); //uso fseek per posizionarmi sullo struct 
 
 
         if(r==0)                        //controllo errori fseek
         {
+            //stampa del record tramite posizione
 
             printf("inserisci la posizione del record da stampare");
 
             scanf("%d",&pos);
 
             stampaRecord(fileName,pos);
+
+            //correzione del record tramite dati richiesti all'utente
 
             printf("inserisci matricola\n");
 
@@ -572,17 +579,17 @@ int correggiRecord(char fileName[], int posizione)
 
             scanf("%d",&buffer.nascita.anno);
 
-            r=fseek(f1,posizione*sizeof(struct studente),SEEK_SET);
+            r=fseek(f1,posizione*sizeof(struct studente),SEEK_SET);     //con fseek mi posiziono sul record da correggere
             
-            fwrite(&buffer,sizeof(struct studente),1,f1);       //scrittura su file dei campi inseriti sopra
+            fwrite(&buffer,sizeof(struct studente),1,f1);               //scrittura su file dei campi inseriti sopra
         
         }
 
-            fclose(f1);
+            fclose(f1);                                               //chiusura file
 
     }
 
-    else
+    else                                                            //se non è  possibile aprire il file da un messaggio di errore
 
     {
         printf("impossibile aprire");
@@ -599,7 +606,7 @@ int numeroRecord(char fileName[])
 	int r;			                                    //variabile per controllo errori
 
 	int n=sizeof(buffer);								/*con la funzione sizeof ho la grandezza in 
-                                                          byte del buffer
+                                                          byte del buffer.
                                                         */
     
 	int numerorecord;								    //numero record presenti
@@ -621,10 +628,9 @@ int numeroRecord(char fileName[])
 		return numerorecord;							//restituisce il numero di record
 		
 	}
-	else													
+	else												//se non è  possibile aprire il file da un messaggio di errore	
 	{
 		printf("impossibile aprire il file");
 		                                   
 	}
 }
-
