@@ -4,11 +4,11 @@
 * <specifiche del collaudo>                                                                                   *
 *                                                                                                             *
 * @author SIMONE ACCONCIA 4^H                                                                                 *
-* @date 18/12/2022									                                                          *
+* @date 18/12/2022									                      *
 * @version 1.0 <15/12/2022> <inserita la prima funzione: void inserisciRecord>                                *
 * @version 1.1 <18/12/2022> <inserita funzione:stampaFile,ricercaRecord,stampaRecord,correggiRecord>          *                                                                                                      *
-* @version 1.2 <19/12/2022> <correzione funzione: ricercaRecord>	                                          *
-*@versione 1.3 <20/12/2022>	<correzione errori,inserimento funzione NumeroRecord	                          *
+* @version 1.2 <19/12/2022> <correzione funzione: ricercaRecord>	                                      *
+*@versione 1.3 <20/12/2022>	<correzione errori,inserimento funzione NumeroRecord	                      *
 /*************************************************************************************************************/
 
 
