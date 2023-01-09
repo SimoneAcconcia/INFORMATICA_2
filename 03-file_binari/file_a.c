@@ -154,8 +154,104 @@ int main()
 	
 	int s;                                      //variabile per scelta del menù
 
+	printf("inserisci un numero per:\n");
+	printf("1: inserimento record\n");
+	printf("2: stampa record su file\n");
+	printf("3: ricerca record\n");
+	printf("4: stampa record dando il parametro posizione\n");
+	printf("5: correggi record\n");
+	printf("6: numero record\n");
+	scanf("%d",&s);
+	switch(s)
+	{
+
+		//funzione inserimento record
+
+		case 1:
+
+		printf("inserisci il numero di studenti\n");
 	
+		scanf("%d",&pos);
 	
+		r=inserisciRecord(NomeFile,pos);
+
+		break;
+
+		//funzione stampa file
+
+		case 2:
+		
+		r=stampaFile(NomeFile);
+
+		break;
+
+		//funzione ricerca record
+
+		case 3:
+		
+		printf("inserisci il cognome per effetuare la ricerca\n");
+				
+		scanf("%s",stringa);
+				
+		printf("\n");
+							
+		r=ricercaRecord(NomeFile,stringa);
+					
+		printf("posizione primo record trovato:%d\n",r);
+
+		break;
+
+		//funzione StampaRecord
+
+		case 4 :
+
+		printf("inserisci il numero di posizione del record per stamparlo\n");
+				
+		scanf("%d",&pos);
+							
+		r=stampaRecord(NomeFile,pos);
+							
+		if(r==0)        //controllo se il record è stato trovato la funzione restituisce 0
+		{
+
+		printf("RECORD PRESENTE\n");
+							
+		}
+							
+		else
+		{
+			printf("RECORD NON TROVATO\n");
+		}
+
+		break;
+
+		//funzione correggirecord      
+
+		case 5:
+
+		printf("inserisci la posizione del record da modificare\n");
+				
+		scanf("%d",&pos);
+									
+		printf("\n");
+									
+		r=correggiRecord(NomeFile,pos);
+
+		break;
+
+		//funzione numero record
+
+		case 6:
+	
+		r=numeroRecord(NomeFile);
+
+		printf("il numero di record : %d\n",r);
+
+		break;
+	
+
+	}
+
 	//funzione inserimento record
 
 	printf("inserisci il numero di studenti\n");
@@ -217,9 +313,9 @@ int main()
 	printf("il numero di record : %d\n",r);
 	
    
-	
+}	
 
-}
+
 
 int inserisciRecord(char fileName[], int numRecord) // fwrite
 {
