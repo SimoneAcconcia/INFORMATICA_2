@@ -152,7 +152,9 @@ int main()
 
 	char stringa [S];                           //usata come parametro cognome all'interno delle funzioni
     
-    int s;
+    int s;                                      //variabile per scelta del menù
+
+
 	
     //funzione inserimento record
 
@@ -266,7 +268,7 @@ int inserisciRecord(char fileName[], int numRecord) // fwrite
 
             printf("inserisci mese\n");
 
-            scanf("%s",&buffer.nascita.mese);
+            scanf("%s",buffer.nascita.mese);
             
             printf("\n");
 
@@ -586,7 +588,7 @@ int correggiRecord(char fileName[], int posizione)
 
             printf("inserisci  il mese di nascita\n");
 
-            scanf("%s",&buffer.nascita.mese);
+            scanf("%s",buffer.nascita.mese);
 
             printf("inserisci anno di nascita\n");
 
