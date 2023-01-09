@@ -15,9 +15,7 @@
 //inclusione delle librerie
 
 #include <stdio.h>       //inclusione libreria per input output   
-
 #include <stdlib.h>	    //per l'utilizzo di system
-
 #include <string.h>     //inclusione libreria per le stringhe
 
 
@@ -66,7 +64,7 @@ int inserisciRecord(char fileName[], int numRecord);
 
 
 
-/** ****************************************************************************************
+/******************************************************************************************
 * @brief<la funzione stampaFile visualizza sul monitor le informazioni di tutti i  record del file>
 * @param  <una stringa (nome del file)>
 * @retval <restituisce 0 se la funzione è andata a buon fine , -1 se  ci siono errori>
