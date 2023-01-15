@@ -11,61 +11,60 @@
 #include <cstdlib>
 #include <iostream>				//libreria per input output 
 #include <iomanip>
-using namespace std;			//per funzioni coute cin
+using namespace std;			//per funzioni cout e cin
 
-class Frazione					//classe frazione contiene gli attributi numeratore e denominatore
+class Frazione					//la classe per riconoscerla la scriviamo con la lettera maiuscola
+
 {
-	private:					//attributi privati
-
-	//definizione attributi di classe
+	private : 					//dichiarazione attributi privati
 	
 	int numeratore;
 	int denominatore;
 	
-	public : 					//attributi pubblici
+	public :
 	
-	Frazione ()
+	Frazione (){}					//metodo costruttore si riconosce perchè ha lo stesso nome della classe
+	
+	void Setnumeratore(int n)	//tramite  set possiamo usare attributi privati
 	{
-		
+		numeratore=n;
 	}
-	
-	
-		void setNumeratore (int n)	//serve per avvalorare il campo numeratore 
-		{
-			numeratore=n;	
-		}
-	
-		void setDenominatore (int d)
-		{
-			denominatore = d; 
-		}
 		
-		void getNumeratore ()
-		{
-			return numeratore;
-		}
-	
-		void getDenominatore ()
-		{
-			return denominatore;
-		}
+	void Setdenominatore(int d)	//tramite  set possiamo usare attributi privati	
+	{
+		denominatore = d;
+	}
 		
-		void stampa ()
-		{
-			cout<<numeratore<<"/"<<denominatore;
-		}
-	
-
-	
+	int Getnumeratore ()		//tramite la funzione get restituiamo den e numeratore nel main
+	{
+		return numeratore;
+	}
+		
+	int Getdenominatore ()
+	{
+		return denominatore;
+	}
+		
+	void stampa()				//stampa a video la frazione	
+	{
+		cout<<"il numeratore:"<<numeratore<<endl;
+		cout<<"il denominatore:"<<denominatore<<endl;
+		cout<<numeratore<<"/"<<denominatore<<endl;
+			
+	}
+		
+		
 	
 };
 
-int main ()
+int main()
 {
-	frazione f1 ;			//definizione oggetto
-	f1.setNumeratore(12);
-	f1.setDenominatore(3);
-	f1.stampa();
+	Frazione f1;		//definizione dell'oggetto
+	
+	f1.Setnumeratore(12);
+	f1.Setdenominatore(5);
+	f1.stampa()	;
+	system ("pause");
 	
 	
 }
