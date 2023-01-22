@@ -6,9 +6,12 @@
 * @date 19/01/2023	                                                                                          *
 **************************************************************************************************************/								                                                          *
 
-#include <iostream>
-#include <math.h>
+#include <cstdlib>
+#include <iostream>	
+#include <math.h>			//libreria per input output 
+#include <iomanip>
 using namespace std;
+
 
 class Rettangolo
 {
@@ -79,6 +82,9 @@ class Rettangolo
 int main()
 {
 	Rettangolo r1;
+	Rettangolo r2;
+	
+	double r;
 	
 	r1.SetAltezza(5);
 	r1.SetBase(12);
@@ -89,6 +95,11 @@ int main()
 	cout<<"inserisci altezza"<<endl;
 	cin>>altezza>>endl;
 	Rettangolo r2(base,altezza);
+	cout<<"base del secondo  rettangolo:"<<base<<endl;
+	cout<<"altezza del secondo rettangolo:"<<altezza<<endl;
+	
+
+	
 	
 	
 }
