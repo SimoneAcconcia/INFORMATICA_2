@@ -6,12 +6,9 @@
 * @date 19/01/2023	                                                                                          *
 **************************************************************************************************************/								                                                          *
 
-#include <cstdlib>
 #include <iostream>	
-#include <math.h>			//libreria per input output 
-#include <iomanip>
+#include <math.h>		
 using namespace std;
-
 
 class Rettangolo
 {
@@ -75,31 +72,30 @@ class Rettangolo
 		return sqrt(base*base+altezza*altezza);
 	}
 	
-	
 };
 
 
 int main()
 {
 	Rettangolo r1;
-	Rettangolo r2;
+	//Rettangolo r2;
 	
-	double r;
+	//double r;
 	
 	r1.SetAltezza(5);
 	r1.SetBase(12);
-	cout<<"base del primo rettangolo:"<<base<<endl;
-	cout<<"altezza del primo rettangolo:"<<altezza<<endl;
+	
+	
+	
+	cout<<"base del primo rettangolo:"<<r1.GetBase()<<endl;
+	cout<<"altezza del primo rettangolo:"<<r1.GetAltezza()<<endl;
 	cout<<"inserisci base:"<<endl;
-	cin>>base>>endl
+	cin>>b;
 	cout<<"inserisci altezza"<<endl;
-	cin>>altezza>>endl;
-	Rettangolo r2(base,altezza);
-	cout<<"base del secondo  rettangolo:"<<base<<endl;
-	cout<<"altezza del secondo rettangolo:"<<altezza<<endl;
-	
-
-	
+	cin>>a;
+	Rettangolo r2(b,a);
+	cout<<"base del secondo  rettangolo:"<<r2.GetBase()<<endl;
+	cout<<"altezza del secondo rettangolo:"<<r2.GetAltezza()<endl;
 	
 	
 }
