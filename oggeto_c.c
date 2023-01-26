@@ -1,70 +1,114 @@
 /**************************************************************************************************************
-* @brief scrivere un programma in c  usando un costruttore                                                    *
+* @brief GESTIONE DEI FILE BINARI                                                                             *
 * <specifiche del progetto>                                                                                   *
-* <specifiche del collaudo>                                                                                   *                                                                                                             *
+* <specifiche del collaudo>                                                                                   *
 * @author SIMONE ACCONCIA 4^H                                                                                 *
-* @date   12/01/2023             								                                              *
-* @version 1.0 <12/01/2023 > <scrivere un programma in c  usando un costruttore >                             *
-/*************************************************************************************************************/
+* @date 19/01/2023	                                                                                          *
+**************************************************************************************************************/		
 
+#include <iostream>	
+#include <math.h>		
+using namespace std;
 
-#include <cstdlib>
-#include <iostream>				//libreria per input output 
-#include <iomanip>
-using namespace std;			//per funzioni cout e cin
-
-class Frazione					//la classe per riconoscerla la scriviamo con la lettera maiuscola
-
+class Rettangolo
 {
-	private : 					//dichiarazione attributi privati
+	private:
+	double base;
+	double altezza;
 	
-	int numeratore;
-	int denominatore;
+	public: 
 	
-	public :
+	//metodi costruttori
 	
-	Frazione (){}					//metodo costruttore si riconosce perchè ha lo stesso nome della classe
+	Rettangolo()	//inizializza gli attributi privati ad uno
+	{
+		base=1;
+		altezza=1;
+	}
 	
-	void Setnumeratore(int n)	//tramite  set possiamo usare attributi privati
+	Rettangolo(double b ,double a)
 	{
-		numeratore=n;
+		base=b;
+		altezza=a;
 	}
-		
-	void Setdenominatore(int d)	//tramite  set possiamo usare attributi privati	
+	
+	//metodi get e setter
+	
+	void SetAltezza(double a)
 	{
-		denominatore = d;
+		altezza =a;
 	}
-		
-	int Getnumeratore ()		//tramite la funzione get restituiamo den e numeratore nel main
+	
+	void SetBase(double b)
 	{
-		return numeratore;
+		base = b;
 	}
-		
-	int Getdenominatore ()
+	
+	
+	double GetAltezza ()
 	{
-		return denominatore;
+		return altezza;
 	}
-		
-	void stampa()				//stampa a video la frazione	
+	
+	double GetBase ()
 	{
-		cout<<"il numeratore:"<<numeratore<<endl;
-		cout<<"il denominatore:"<<denominatore<<endl;
-		cout<<numeratore<<"/"<<denominatore<<endl;
-			
+		return base; 
 	}
-		
-		
+	
+	//metodi per calcolare area,perimetro,diagonale
+	
+	double CalcolaPerimetro() //USO GLI ATTRIBUTI E NON PARAMETRI  perchè lavoro sugli oggetti
+	{
+		return (altezza)*2+(base)*2;
+	}
+	
+	double CalcolaArea()
+	{
+		return (base*altezza);
+	}
+	
+	double calcolaDiagonale()
+	{
+		return sqrt(base*base+altezza*altezza);
+	}
+	
+	void stampa()
+	{
+	
+	}
 	
 };
 
+
 int main()
 {
-	Frazione f1;		//definizione dell'oggetto
+	Rettangolo r1;
+	//Rettangolo r2;
 	
-	f1.Setnumeratore(12);
-	f1.Setdenominatore(5);
-	f1.stampa()	;
-	system ("pause");
+	//double r;
 	
+	double b;
+	double a;
+	
+	r1.SetAltezza(5);
+	r1.SetBase(12);
+	cout<<"base del primo rettangolo:"<<r1.GetBase()<<endl;
+	cout<<"altezza del primo rettangolo:"<<r1.GetAltezza()<<endl;
+	cout<<"calcolo area primo rettangolo:"<<r1.CalcolaArea()<<endl;
+	cout<<"calcolo perimetro primo rettangolo :"<<r1.CalcolaPerimetro()<<endl;
+	cout<<"calcolo diagonale obliquo primo rettangolo: "<<r1.calcolaDiagonale()<<endl;
+	
+	
+	//secondo oggetto
+	cout<<"inserisci base:"<<endl;
+	cin>>b;
+	cout<<"inserisci altezza"<<endl;
+	cin>>a;
+	Rettangolo r2(b,a);
+	cout<<"base del secondo  rettangolo:"<<r2.GetBase()<<endl;
+	cout <<"altezza del secondo rettangolo"<<r2.GetAltezza()<<endl;
+	cout<<"calcolo area secondo rettangolo"<<r2.CalcolaArea()<<endl;
+	cout<<"calcolo perimetro secondo rettangolo"<<r2.CalcolaPerimetro()<<endl;
+	cout<<"calcolo diagonale obliquo secondo rettangolo"<<r2.calcolaDiagonale()<<endl;
 	
 }
