@@ -72,12 +72,7 @@ class ContatoreDoppio :public Contatore
 		Contatore ::incrementa();
 	}
 	
-	void stampa_oggetto2()
-	{
-	    cout<<"il valore del secondo contatore:"<<getValore()<<endl;
-    	cout <<"il contatore ha un passo di:"<<getPasso()<<endl;
-    	cout<<"il valore del secondo contatore incrementato:"<<getValore()<<endl;
-	}
+
 	
 	
 };
@@ -88,16 +83,15 @@ int main()
 	Contatore  cont1(0,2);
 	ContatoreDoppio cont2();
 	
-	/*cout<<"il valore del primo contatore:"<<cont1.getValore()<<endl;
+	cout<<"il valore del primo contatore:"<<cont1.getValore()<<endl;
 	cout<<"il valore del secondo contatore:"<<cont2.getValore()<<endl;
 	cout <<"il contatore ha un passo di:"<<cont1.getPasso()<<endl;
-	cout <<"il contatore ha un passo di:"<<cont2.getPasso()<<endl;*/
+	cout <<"il contatore ha un passo di:"<<cont2.getPasso()<<endl;
 	cont1.incrementa();
 	cont2.incrementa();
-	cont1.stampa();
-	/*cout<<"contatore incrementato:"<<cont1.getValore()<<endl;
+	cout<<"contatore incrementato:"<<cont1.getValore()<<endl;
 	cout<<"il valore del secondo contatore incrementato:"<<cont2.getValore()<<endl;
-*/
+
 	
 
 	
