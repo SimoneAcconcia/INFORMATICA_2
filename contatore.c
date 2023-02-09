@@ -10,28 +10,36 @@ class Contatore
 	int passo;		//passo di quanto aumento ogni volta
 	
 	public:
-	Contatore();
+	Contatore()
+	{
+		valore=1;
+		passo=1;
+	}
 	
-	Contatore(int,int);
+	Contatore(int v,int p)
+	{
+		valore=v;
+		passo=p;
+	}
 	
 	void incrementa()
 	{
 		valore=valore+passo;
 	}
 	
-	void visualizza ()
+	/*void visualizza ()
 	{
-		cout<<"il valore:"<<getValore()<<endln;
-		cout <<"il passo"<<getPasso()<<endln;
-		cout <<"contatore incrementato di:"<<incrementa()<<endln;
+		cout<<"il valore:"<<getValore()<<endl;
+		cout <<"il passo"<<getPasso()<<endl;
+		cout <<"contatore incrementato di:"<<incrementa()<<endl;
 		
-	}
+	}*/
 	
-	int getValore();
+	int getValore()
 	{
 		return valore;
 	}
-	int getPasso();
+	int getPasso()
 	{
 		return passo;
 	}
@@ -46,28 +54,35 @@ class Contatore
 		
 };
 
-class ContatoreDoppio :: class Contatore
+class ContatoreDoppio :public Contatore
 {
 	public :
-	ContatoreDoppio(int n) : Contatore(n){};
+	ContatoreDoppio() : Contatore(){};
 	void incrementa()
 	{
-		void incrementa();
-		void incrementa();
+		Contatore ::incrementa();
+		Contatore ::incrementa();
 	}
 	
 	
-}
+};
 
 int main()
 {
-	Contatore contatore(10);
-	ContatoreDoppio contatore2(10) ;
-	cout<<"il valore del primo contatore:"<<contatore.getValore()<<endln;
-	cout<<"il valore del secondo contatoreç:"<<contatore2.getValore()<<endln;
 	
+	Contatore  cont1(10,2);
+	ContatoreDoppio cont2;
 	
+	cout<<"il valore del primo contatore:"<<cont1.getValore()<<endl;
+	cout<<"il valore del secondo contatore:"<<cont2.getValore()<<endl;
+	cout <<"il contatore ha un passo di:"<<cont1.getPasso()<<endl;
+	cout <<"il contatore ha un passo di:"<<cont2.getPasso()<<endl;
+	cont1.incrementa();
+	cont2.incrementa();
+	cout<<"contatore incrementato:"<<cont1.getValore()<<endl;
+	cout<<"il valore del secondo contatore incrementato:"<<cont2.getValore()<<endl;
+
 	
-	
+
 	
 }
