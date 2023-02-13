@@ -54,7 +54,10 @@ class LED {
 
     void test(int nr) //testa il metodo lampegggio
     {
-      lampeggio(nr); 
+      
+     // accendi();
+      lampeggio(nr);
+      
     }
 };
 
@@ -73,28 +76,25 @@ class Pulsante
     }
 
     
-    int press() /*se il pulsante è premuto  accende il led BLU 
-    			se rilasciato accende quello verde spegnendo 
-                il led blu */
+    int press() 
     {
-      while (digitalRead(pin) == LOW)
-        {
-          return 1;
-        }   
+      if (digitalRead(pin) == LOW)
+      {
+         return 1;
+      }   
       return 0;
     } 
 
-    int click()		//se premuto accende il led blu , 
-      				/*quando è rilasciato il pulsante spegne 
-      				il led blu */
+    int click()
     {
-      if (digitalRead(pin) == HIGH)
+      if(press())
       {
-        return 0;
+        while(press()) {;}
+        return 1;
       }
       else
       {
-        return 1;
+        return 0;
       }
     }
 };
@@ -105,8 +105,8 @@ LED ledBlu(13);
 Pulsante pulsante(2);
 
 void setup() {
-  ledVerde.test(3);
   ledBlu.test(3);
+  ledVerde.test(3); 
 }
 
 void loop() {
@@ -121,13 +121,10 @@ void loop() {
       ledBlu.spegni();
     }
 
-  if (pulsante.click())
+  if(pulsante.click())
     { 
-      delay(500);
-      ledBlu.accendi();
+      ledBlu.inverti();
     }
-    else 
-    {
-      ledBlu.spegni();
-    }
+    
+
 }
