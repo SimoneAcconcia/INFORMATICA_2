@@ -80,8 +80,12 @@ class ContatoreDoppio :public Contatore
 int main()
 {
 	
-	Contatore  cont1(0,2);
-	ContatoreDoppio cont2();
+	Contatore  cont1;
+	ContatoreDoppio cont2;
+	cont1.setValore(0);
+	cont1.setPasso(1);
+	cont2.setValore(0);
+	cont2.setPasso(1);
 	
 	cout<<"il valore del primo contatore:"<<cont1.getValore()<<endl;
 	cout<<"il valore del secondo contatore:"<<cont2.getValore()<<endl;
