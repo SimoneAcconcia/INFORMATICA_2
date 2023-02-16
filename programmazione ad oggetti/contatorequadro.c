@@ -55,10 +55,10 @@ class Contatore
 class ContatoreDoppio: public Contatore 	//contatore doppio sottoclasse di contatore
 {
 	public:
-	ContatoreDoppio():Contatore(){}  	//eredita metodo costruttore superclasse		
+	ContatoreDoppio():Contatore(){}  	//richiama metodo costruttore superclasse		
 	void incrementa()
 	{
-		Contatore::incrementa();		//usi il metodo incrementa ereditato da classe 1
+		Contatore::incrementa();		//richiama il metodo incrementa ereditato da classe 1
 		Contatore::incrementa();
 	}
 	
@@ -70,10 +70,9 @@ class ContatoreQuadruplo: public ContatoreDoppio
 	ContatoreQuadruplo():ContatoreDoppio( ){}
 	void incrementa()
 	{
-		Contatore::incrementa();
-		Contatore::incrementa();
-		Contatore::incrementa();
-		Contatore::incrementa();
+		ContatoreDoppio::incrementa();
+		ContatoreDoppio::incrementa();
+	
 	}
 	
 };
